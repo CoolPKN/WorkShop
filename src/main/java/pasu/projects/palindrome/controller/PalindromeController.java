@@ -10,6 +10,7 @@ import pasu.projects.palindrome.repository.PalindromeRepo;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 @RestController
 public class PalindromeController {
@@ -37,17 +38,21 @@ public class PalindromeController {
     @GetMapping("/api/check/{userInput}")
     String checkPalindrome(@PathVariable String userInput) {
         System.out.println("User Input is " + userInput);
-        if (null != userInput) {
+        try {
+            final Pattern pattern = Pattern.compile("^[A-Za-z ]++$");
+            if ((null != userInput) && (pattern.matcher(userInput).matches())) {
                 StringBuilder strRev = new StringBuilder(userInput.toLowerCase());
                 strRev.reverse();
-
                 if (userInput.contentEquals(strRev))
                     return "This is Palindrome";
                 else
                     return "This is not Palindrome";
-        } else {
-                return "Not a valid Input!!!";
+            } else {
+                throw new IllegalArgumentException("Invalid input string");
+            }
+        } catch(Exception e){
+            System.out.println("Exception throw :  " + e);
         }
-
+        return "Exception thrown";
     }
 }
