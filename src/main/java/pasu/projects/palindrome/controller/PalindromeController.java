@@ -33,4 +33,21 @@ public class PalindromeController {
         }
         return input.get();
     }
+
+    @GetMapping("/api/check/{userInput}")
+    String checkPalindrome(@PathVariable String userInput) {
+        System.out.println("User Input is " + userInput);
+        if (null != userInput) {
+                StringBuilder strRev = new StringBuilder(userInput.toLowerCase());
+                strRev.reverse();
+
+                if (userInput.contentEquals(strRev))
+                    return "This is Palindrome";
+                else
+                    return "This is not Palindrome";
+        } else {
+                return "Not a valid Input!!!";
+        }
+
+    }
 }

@@ -25,9 +25,9 @@ public class PalindromeRepo {
 
     @PostConstruct
     private void init(){
-        inputStrings.add(new Input(1, "AMMA"));
-        inputStrings.add(new Input(2, "APPA"));
-        inputStrings.add(new Input(3, "AKKA"));
-        inputStrings.add(new Input(4, "ANNA"));
+        inputStrings.add(new Input(1, "AMMA", true));
+        inputStrings.add(new Input(2, "APPA", true));
+        inputStrings.add(new Input(3, "AKKA", true));
+        inputStrings.add(new Input(4, "ANNA", true));
     }
 }
