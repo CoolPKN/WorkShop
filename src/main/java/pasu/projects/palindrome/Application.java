@@ -1,5 +1,6 @@
 package pasu.projects.palindrome;
 
+import java.util.Objects;
 import java.util.Scanner;
 import java.io.*;
 import org.slf4j.Logger;
@@ -18,15 +19,23 @@ public class Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 		log.info("Application Palindrome Started Successfully");
+
+		// Get UserName
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("Enter your username: ");
 		String userName = scanner.nextLine();
-		log.info("Hello {}, Welcome to Palindrome-Check Project.", userName );
+		log.info("Hello {}, Welcome to Palindrome-Check Project.", userName);
 
-		System.out.println("Enter your String to validate Palindrome: ");
-		String inputString = scanner.nextLine();
-		inputString=inputString.toLowerCase();
+		//Get input string - which is not null
+		String inputString;
+		do {
+			System.out.println("Enter your String to check if the string entered is Palindrome: ");
+			inputString = scanner.nextLine();
+			log.info(inputString);
+		}
+		while (Objects.requireNonNull(inputString).isEmpty());
 
+		inputString = inputString.toLowerCase();
 		StringBuilder strRev = new StringBuilder(inputString);
 		strRev.reverse();
 
@@ -34,10 +43,10 @@ public class Application {
 			log.info("Hello {}, {} is Palindrome", userName, inputString);
 		else
 			log.info("Hello {}, {} is Not a Palindrome", userName, inputString);
-		}
 
-    }
-
+		System.out.println("Palindrome Check is completed!!!");
+	}
+}
 
 //	@Bean
 //  CommandLineRunner getInputValue(String inputString) {
@@ -46,4 +55,3 @@ public class Application {
 //            log.info("Input String is : {}", input);
 //		};
 //	}
-
